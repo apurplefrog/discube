@@ -1,5 +1,5 @@
 mod scramblers;
 
 fn main() {
-    println!("{}", scramblers::megaminx::scramble());
+    println!("{}", scramblers::megaminx::scramble(1)[0]);
 }
