@@ -9,8 +9,8 @@ pub fn scramble(scramble_number: u32) -> Vec<String> {
             let current_move = match (i % 2, i % 10, rng.gen_bool(0.5)) {
                 (1, _, true) => "R++ ",
                 (1, _, false) => "R-- ",
-                (0, 0, true) => "D++ U\n",
-                (0, 0, false) => "D-- U'\n",
+                (0, 0, true) => "D++ U\n  ",
+                (0, 0, false) => "D-- U'\n  ",
                 (0, _, true) => "D++ ",
                 (0, _, false) => "D-- ",
                 (_, _, _) => "ERR ",
