@@ -14,6 +14,8 @@ pub mod three;
 pub mod three_bld;
 pub mod two;
 
+use rand::{self, Rng};
+
 pub enum Cube {
     Clock,
     FewestMoves,
@@ -33,7 +35,7 @@ pub enum Cube {
 }
 
 impl Cube {
-    fn short_name(self) -> String {
+    pub fn short_name(self) -> String {
         match self {
             Cube::Clock => "clock",
             Cube::FewestMoves => "FM",
@@ -54,7 +56,7 @@ impl Cube {
         .to_string()
     }
 
-    fn long_name(self) -> String {
+    pub fn long_name(self) -> String {
         match self {
             Cube::Clock => "clock",
             Cube::FewestMoves => "3x3x3 fewest moves",
@@ -75,7 +77,7 @@ impl Cube {
         .to_string()
     }
 
-    fn scramble(self, scramble_number: u32) -> Vec<String> {
+    pub fn scramble(self, scramble_number: u32) -> Vec<String> {
         match self {
             Cube::Clock => clock::scramble(scramble_number),
             Cube::FewestMoves => fewest_moves::scramble(scramble_number),
@@ -92,6 +94,26 @@ impl Cube {
             Cube::Three => three::scramble(scramble_number),
             Cube::ThreeBld => three_bld::scramble(scramble_number),
             Cube::Two => two::scramble(scramble_number),
+        }
+    }
+
+    pub fn random_cube() -> Self {
+        let mut rng = rand::thread_rng();
+        match rng.gen_range(0..15) {
+            0 => Self::Clock,
+            1 => Self::FewestMoves,
+            2 => Self::Five,
+            3 => Self::FiveBld,
+            4 => Self::Four,
+            5 => Self::FourBld,
+            6 => Self::Megaminx,
+            7 => Self::Pyraminx,
+            8 => Self::Seven,
+            9 => Self::Six,
+            10 => Self::Skewb,
+            11 => Self::SquareOne,
+            12 => Self::Three,
+            _ => Self::ThreeBld,
         }
     }
 }
