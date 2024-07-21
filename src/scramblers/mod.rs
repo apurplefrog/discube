@@ -14,7 +14,7 @@ pub mod three;
 pub mod three_bld;
 pub mod two;
 
-use rand::{self, Rng};
+use rand::{self, rngs::ThreadRng, Rng};
 
 pub enum Cube {
     Clock,
@@ -94,6 +94,26 @@ impl Cube {
             Cube::Three => three::scramble(scramble_number),
             Cube::ThreeBld => three_bld::scramble(scramble_number),
             Cube::Two => two::scramble(scramble_number),
+        }
+    }
+
+    pub fn average_scramble_count(self) -> u32 {
+        match self {
+            Cube::Clock => 5,
+            Cube::FewestMoves => 3,
+            Cube::Five => 5,
+            Cube::FiveBld => 3,
+            Cube::Four => 5,
+            Cube::FourBld => 3,
+            Cube::Megaminx => 5,
+            Cube::Pyraminx => 5,
+            Cube::Seven => 3,
+            Cube::Six => 3,
+            Cube::Skewb => 5,
+            Cube::SquareOne => 5,
+            Cube::Three => 5,
+            Cube::ThreeBld => 3,
+            Cube::Two => 5,
         }
     }
 
