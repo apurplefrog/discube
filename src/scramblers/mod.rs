@@ -14,294 +14,84 @@ pub mod three;
 pub mod three_bld;
 pub mod two;
 
-pub trait Cube {
-    fn long_name() -> String;
-    fn short_name() -> String;
-    fn average_number() -> u32;
-    fn scramble(scramble_number: u32) -> Vec<String>;
+pub enum Cube {
+    Clock,
+    FewestMoves,
+    Five,
+    FiveBld,
+    Four,
+    FourBld,
+    Megaminx,
+    Pyraminx,
+    Seven,
+    Six,
+    Skewb,
+    SquareOne,
+    Three,
+    ThreeBld,
+    Two,
 }
 
-pub struct Clock;
-impl Cube for Clock {
-    fn long_name() -> String {
-        "Clock".to_string()
+impl Cube {
+    fn short_name(self) -> String {
+        match self {
+            Cube::Clock => "clock",
+            Cube::FewestMoves => "FM",
+            Cube::Five => "5x5",
+            Cube::FiveBld => "5BLD",
+            Cube::Four => "4x4",
+            Cube::FourBld => "4BLD",
+            Cube::Megaminx => "mega",
+            Cube::Pyraminx => "pyra",
+            Cube::Seven => "7x7",
+            Cube::Six => "6x6",
+            Cube::Skewb => "skewb",
+            Cube::SquareOne => "squan",
+            Cube::Three => "3x3",
+            Cube::ThreeBld => "3BLD",
+            Cube::Two => "2x2",
+        }
+        .to_string()
     }
 
-    fn short_name() -> String {
-        "Clock".to_string()
+    fn long_name(self) -> String {
+        match self {
+            Cube::Clock => "clock",
+            Cube::FewestMoves => "3x3x3 fewest moves",
+            Cube::Five => "5x5x5",
+            Cube::FiveBld => "5x5x5 blindfolded",
+            Cube::Four => "4x4x4",
+            Cube::FourBld => "4x4x4 blindfolded",
+            Cube::Megaminx => "megaminx",
+            Cube::Pyraminx => "pyraminx",
+            Cube::Seven => "7x7x7",
+            Cube::Six => "6x6x6",
+            Cube::Skewb => "skewb",
+            Cube::SquareOne => "squan",
+            Cube::Three => "3x3x3",
+            Cube::ThreeBld => "3x3x3 blindfolded",
+            Cube::Two => "2x2x2",
+        }
+        .to_string()
     }
 
-    fn average_number() -> u32 {
-        5
-    }
-
-    fn scramble(scramble_number: u32) -> Vec<String> {
-        clock::scramble(scramble_number)
-    }
-}
-
-pub struct FewestMoves;
-impl Cube for FewestMoves {
-    fn long_name() -> String {
-        "3x3x3 Fewest Moves".to_string()
-    }
-
-    fn short_name() -> String {
-        "FMC".to_string()
-    }
-
-    fn average_number() -> u32 {
-        3
-    }
-
-    fn scramble(scramble_number: u32) -> Vec<String> {
-        fewest_moves::scramble(scramble_number)
-    }
-}
-
-pub struct Five;
-impl Cube for Five {
-    fn long_name() -> String {
-        "5x5x5".to_string()
-    }
-
-    fn short_name() -> String {
-        "5x5".to_string()
-    }
-
-    fn average_number() -> u32 {
-        5
-    }
-
-    fn scramble(scramble_number: u32) -> Vec<String> {
-        five::scramble(scramble_number)
-    }
-}
-
-pub struct FiveBld;
-impl Cube for FiveBld {
-    fn long_name() -> String {
-        "5x5x5 Blindfolded".to_string()
-    }
-
-    fn short_name() -> String {
-        "5BLD".to_string()
-    }
-
-    fn average_number() -> u32 {
-        3
-    }
-
-    fn scramble(scramble_number: u32) -> Vec<String> {
-        five_bld::scramble(scramble_number)
-    }
-}
-
-pub struct Four;
-impl Cube for Four {
-    fn long_name() -> String {
-        "4x4x4".to_string()
-    }
-
-    fn short_name() -> String {
-        "4x4".to_string()
-    }
-
-    fn average_number() -> u32 {
-        5
-    }
-
-    fn scramble(scramble_number: u32) -> Vec<String> {
-        four::scramble(scramble_number)
-    }
-}
-
-pub struct FourBld;
-impl Cube for FourBld {
-    fn long_name() -> String {
-        "Four_bld".to_string()
-    }
-
-    fn short_name() -> String {
-        "Four_bld".to_string()
-    }
-
-    fn average_number() -> u32 {
-        5
-    }
-
-    fn scramble(scramble_number: u32) -> Vec<String> {
-        four_bld::scramble(scramble_number)
-    }
-}
-
-pub struct Megaminx;
-impl Cube for Megaminx {
-    fn long_name() -> String {
-        "Megaminx".to_string()
-    }
-
-    fn short_name() -> String {
-        "Mega".to_string()
-    }
-
-    fn average_number() -> u32 {
-        5
-    }
-
-    fn scramble(scramble_number: u32) -> Vec<String> {
-        megaminx::scramble(scramble_number)
-    }
-}
-
-pub struct Pyraminx;
-impl Cube for Pyraminx {
-    fn long_name() -> String {
-        "Pyraminx".to_string()
-    }
-
-    fn short_name() -> String {
-        "Pyra".to_string()
-    }
-
-    fn average_number() -> u32 {
-        5
-    }
-
-    fn scramble(scramble_number: u32) -> Vec<String> {
-        pyraminx::scramble(scramble_number)
-    }
-}
-
-pub struct Seven;
-impl Cube for Seven {
-    fn long_name() -> String {
-        "7x7x7".to_string()
-    }
-
-    fn short_name() -> String {
-        "7x7".to_string()
-    }
-
-    fn average_number() -> u32 {
-        3
-    }
-
-    fn scramble(scramble_number: u32) -> Vec<String> {
-        seven::scramble(scramble_number)
-    }
-}
-
-pub struct Six;
-impl Cube for Six {
-    fn long_name() -> String {
-        "6x6x6".to_string()
-    }
-
-    fn short_name() -> String {
-        "6x6".to_string()
-    }
-
-    fn average_number() -> u32 {
-        3
-    }
-
-    fn scramble(scramble_number: u32) -> Vec<String> {
-        six::scramble(scramble_number)
-    }
-}
-
-pub struct Skewb;
-impl Cube for Skewb {
-    fn long_name() -> String {
-        "Skewb".to_string()
-    }
-
-    fn short_name() -> String {
-        "Skewb".to_string()
-    }
-
-    fn average_number() -> u32 {
-        5
-    }
-
-    fn scramble(scramble_number: u32) -> Vec<String> {
-        skewb::scramble(scramble_number)
-    }
-}
-
-pub struct SquareOne;
-impl Cube for SquareOne {
-    fn long_name() -> String {
-        "Square-1".to_string()
-    }
-
-    fn short_name() -> String {
-        "Squan".to_string()
-    }
-
-    fn average_number() -> u32 {
-        5
-    }
-
-    fn scramble(scramble_number: u32) -> Vec<String> {
-        square_one::scramble(scramble_number)
-    }
-}
-
-pub struct Three;
-impl Cube for Three {
-    fn long_name() -> String {
-        "3x3x3".to_string()
-    }
-
-    fn short_name() -> String {
-        "3x3".to_string()
-    }
-
-    fn average_number() -> u32 {
-        5
-    }
-
-    fn scramble(scramble_number: u32) -> Vec<String> {
-        three::scramble(scramble_number)
-    }
-}
-
-pub struct ThreeBld;
-impl Cube for ThreeBld {
-    fn long_name() -> String {
-        "3x3x3 Blindfolded".to_string()
-    }
-
-    fn short_name() -> String {
-        "3BlD".to_string()
-    }
-
-    fn average_number() -> u32 {
-        3
-    }
-
-    fn scramble(scramble_number: u32) -> Vec<String> {
-        three_bld::scramble(scramble_number)
-    }
-}
-
-pub struct Two;
-impl Cube for Two {
-    fn long_name() -> String {
-        "2x2x2".to_string()
-    }
-
-    fn short_name() -> String {
-        "2x2".to_string()
-    }
-
-    fn average_number() -> u32 {
-        5
-    }
-
-    fn scramble(scramble_number: u32) -> Vec<String> {
-        two::scramble(scramble_number)
+    fn scramble(self, scramble_number: u32) -> Vec<String> {
+        match self {
+            Cube::Clock => clock::scramble(scramble_number),
+            Cube::FewestMoves => fewest_moves::scramble(scramble_number),
+            Cube::Five => five::scramble(scramble_number),
+            Cube::FiveBld => five_bld::scramble(scramble_number),
+            Cube::Four => four::scramble(scramble_number),
+            Cube::FourBld => four_bld::scramble(scramble_number),
+            Cube::Megaminx => megaminx::scramble(scramble_number),
+            Cube::Pyraminx => pyraminx::scramble(scramble_number),
+            Cube::Seven => seven::scramble(scramble_number),
+            Cube::Six => six::scramble(scramble_number),
+            Cube::Skewb => skewb::scramble(scramble_number),
+            Cube::SquareOne => square_one::scramble(scramble_number),
+            Cube::Three => three::scramble(scramble_number),
+            Cube::ThreeBld => three_bld::scramble(scramble_number),
+            Cube::Two => two::scramble(scramble_number),
+        }
     }
 }
