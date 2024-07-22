@@ -58,20 +58,20 @@ impl Cube {
 
     pub fn long_name(&self) -> String {
         match self {
-            Cube::Clock => "clock",
-            Cube::FewestMoves => "3x3x3 fewest moves",
+            Cube::Clock => "Clock",
+            Cube::FewestMoves => "3x3x3 Fewest Moves",
             Cube::Five => "5x5x5",
-            Cube::FiveBld => "5x5x5 blindfolded",
+            Cube::FiveBld => "5x5x5 Blindfolded",
             Cube::Four => "4x4x4",
-            Cube::FourBld => "4x4x4 blindfolded",
-            Cube::Megaminx => "megaminx",
-            Cube::Pyraminx => "pyraminx",
+            Cube::FourBld => "4x4x4 Blindfolded",
+            Cube::Megaminx => "Megaminx",
+            Cube::Pyraminx => "Pyraminx",
             Cube::Seven => "7x7x7",
             Cube::Six => "6x6x6",
-            Cube::Skewb => "skewb",
-            Cube::SquareOne => "squan",
+            Cube::Skewb => "Skewb",
+            Cube::SquareOne => "Squan",
             Cube::Three => "3x3x3",
-            Cube::ThreeBld => "3x3x3 blindfolded",
+            Cube::ThreeBld => "3x3x3 Blindfolded",
             Cube::Two => "2x2x2",
         }
         .to_string()
