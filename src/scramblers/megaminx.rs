@@ -18,7 +18,7 @@ pub fn scramble(scramble_number: u32) -> Vec<String> {
 
             current_scramble.push_str(current_move);
         }
-        moves.push(current_scramble);
+        moves.push(current_scramble[0..current_scramble.len() - 1].to_string());
     }
 
     moves
