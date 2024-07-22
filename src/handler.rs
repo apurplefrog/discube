@@ -28,28 +28,52 @@ fn reply(msg: &Message) -> Option<String> {
         return None;
     }
 
-    let function = command_words[1];
+    Some(command(msg))
+}
 
-    if function == "dailyscram" {
-        let clock_scrambles = clock::scramble(5);
-        let mega_scrambles = megaminx::scramble(5);
+fn command(msg: &Message) -> String {
+    let command_words = &msg.content.split_whitespace().collect::<Vec<&str>>()[1..];
+    let function = command_words[0];
 
-        let message = format!(
-            "# Daily Competition #1 🔥\n**Clock Scrambles:**\n1. {}\n2. {}\n3. {}\n4. {}\n5. {}\n**Megaminx Scrambles:**\n1. {}\n2. {}\n3. {}\n4. {}\n5. {}",
-            clock_scrambles[0],
-            clock_scrambles[1],
-            clock_scrambles[2],
-            clock_scrambles[3],
-            clock_scrambles[4],
-            mega_scrambles[0],
-            mega_scrambles[1],
-            mega_scrambles[2],
-            mega_scrambles[3],
-            mega_scrambles[4]
-        );
-
-        return Some(message);
+    match function {
+        "dailyscram" => {
+            if let Ok(number) = command_words[1].parse::<u32>() {
+                generate_daily_scrambles(number)
+            } else {
+                "must be a valid number lmao".to_string()
+            }
+        }
+        _ => format!("Unknown function: {}", function),
     }
+}
 
-    Some("uh".to_string())
+fn format_scramble_vector(scramble_vector: Vec<String>) -> String {
+    scramble_vector
+        .iter()
+        .enumerate()
+        .map(|(i, scramble)| format!("{}. {}", i, scramble))
+        .collect::<String>()
+}
+
+fn generate_daily_scrambles(number: u32) -> String {
+    //let cube1 = Cube::random_cube();
+    let cube1 = Cube::Megaminx;
+    //let cube2 = Cube::random_cube();
+    let cube2 = Cube::Clock;
+
+    let scrambles1 = cube1.scramble(cube1.average_scramble_count());
+    let scrambles2 = cube2.scramble(cube2.average_scramble_count());
+
+    let format = format!(
+        "# Daily Competition #{}! 🔥\n\n**{}** Scrambles:\n{}\n\n**{}** Scrambles:\n{}",
+        number,
+        cube1.long_name(),
+        format_scramble_vector(scrambles1),
+        cube2.long_name(),
+        format_scramble_vector(scrambles2),
+    );
+
+    println!("{format}");
+    println!("LENGTH: {}", format.len());
+    format
 }
