@@ -17,7 +17,7 @@ pub fn scramble(scramble_number: u32) -> Vec<String> {
             .collect();
 
         let current_scramble = format!(
-            "UR{} DR{} DL{} UL{} U{} R{} D{} L{} ALL{} y2 U{} R{} D{} L{} ALL{}",
+            "UR{} DR{} DL{} UL{} U{} R{} D{} L{} ALL{} y2 U{} R{} D{} L{} ALL{}\n",
             numbers_as_strings[0],
             numbers_as_strings[1],
             numbers_as_strings[2],
