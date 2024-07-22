@@ -35,7 +35,7 @@ pub enum Cube {
 }
 
 impl Cube {
-    pub fn short_name(self) -> String {
+    pub fn short_name(&self) -> String {
         match self {
             Cube::Clock => "clock",
             Cube::FewestMoves => "FM",
@@ -56,7 +56,7 @@ impl Cube {
         .to_string()
     }
 
-    pub fn long_name(self) -> String {
+    pub fn long_name(&self) -> String {
         match self {
             Cube::Clock => "clock",
             Cube::FewestMoves => "3x3x3 fewest moves",
@@ -77,7 +77,7 @@ impl Cube {
         .to_string()
     }
 
-    pub fn scramble(self, scramble_number: u32) -> Vec<String> {
+    pub fn scramble(&self, scramble_number: u32) -> Vec<String> {
         match self {
             Cube::Clock => clock::scramble(scramble_number),
             Cube::FewestMoves => fewest_moves::scramble(scramble_number),
@@ -97,7 +97,7 @@ impl Cube {
         }
     }
 
-    pub fn average_scramble_count(self) -> u32 {
+    pub fn average_scramble_count(&self) -> u32 {
         match self {
             Cube::Clock => 5,
             Cube::FewestMoves => 3,
