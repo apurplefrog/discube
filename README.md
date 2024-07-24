@@ -1,4 +1,4 @@
-# discube - ⚠️WIP ⚠️
+# discube - ⚠️ WIP ⚠️
 
 ## Discord bot for automatic cubing competitions
 
@@ -25,6 +25,6 @@ Bot token in ./tokensecret
     - 3x3x3 Blindfolded 
     - 2x2x2
 - Implement stored settings
-- Implement Actual commands
+- Implement actual commands
     - Find crate or figure out how to do that
     - Implement it
