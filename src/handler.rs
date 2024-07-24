@@ -14,11 +14,14 @@ impl EventHandler for Handler {
     }
 
     async fn message(&self, ctx: Context, msg: Message) {
-        if let Some(reply_messages) = reply(&msg) {
-            for reply_message in reply_messages {
-                if let Err(why) = msg.channel_id.say(&ctx.http, reply_message).await {
-                    println!("Error sending message: {:?}", why);
-                }
+        let reply_messages = reply(&msg);
+        if reply_messages.is_none() {
+            return;
+        }
+
+        for reply_message in reply_messages.unwrap() {
+            if let Err(why) = msg.channel_id.say(&ctx.http, reply_message).await {
+                println!("Error sending message: {:?}", why);
             }
         }
     }
@@ -34,18 +37,11 @@ fn reply(msg: &Message) -> Option<Vec<String>> {
 }
 
 fn command(msg: &Message) -> Vec<String> {
-    let command_words = &msg.content.split_whitespace().collect::<Vec<&str>>()[1..];
-    let function = command_words[0];
+    let command = msg.content.split_whitespace().collect::<Vec<&str>>();
 
-    match function {
-        "dailyscram" => {
-            if let Ok(number) = command_words[1].parse::<u32>() {
-                generate_daily_scrambles(number)
-            } else {
-                vec!["must be a valid number lmao".to_string()]
-            }
-        }
-        _ => vec![format!("Unknown function: {}", function)],
+    match command[1] {
+        "dailyscram" => daily_scram(command),
+        _ => vec![format!("Unknown command: {}", command[1])],
     }
 }
 
@@ -57,7 +53,12 @@ fn format_scramble_vector(scramble_vector: Vec<String>) -> String {
         .collect::<String>()
 }
 
-fn generate_daily_scrambles(number: u32) -> Vec<String> {
+fn daily_scram(command: Vec<&str>) -> Vec<String> {
+    let number = command[2].parse::<u32>();
+    if number.is_err() {
+        return vec!["Please input a valid positive integer!".to_string()];
+    }
+
     //let cube1 = Cube::random_cube();
     let cube1 = Cube::Megaminx;
     //let cube2 = Cube::random_cube();
@@ -68,7 +69,7 @@ fn generate_daily_scrambles(number: u32) -> Vec<String> {
 
     let intro = format!(
         "# Daily Comp #{} 🔥\nToday's events are **{}** and **{}**",
-        number,
+        number.unwrap(),
         cube1.long_name(),
         cube2.long_name()
     );
