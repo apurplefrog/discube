@@ -14,7 +14,7 @@ pub mod three;
 pub mod three_bld;
 pub mod two;
 
-use rand::{self, rngs::ThreadRng, Rng};
+use rand::{self, Rng};
 
 pub enum Cube {
     Clock,
